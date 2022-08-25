@@ -8,7 +8,7 @@
 kubectl create ns mysql-router
 ```
 
-2. Make change to the yaml file and update the MySQL host/user/password entries.
+2. Make change to the myexternal.yaml file and update the ip address for the external-mysql-3310 endpoint
 
 3. Deploy the mysql-router deployment
 ```

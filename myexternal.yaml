@@ -1,0 +1,23 @@
+kind: "Service"
+apiVersion: "v1"
+metadata:
+  name: "external-mysql-3310"
+  namespace: mysql-router
+spec:
+  ports:
+    - name: "mysql3310"
+      protocol: "TCP"
+      port: 3310
+      targetPort: 3310
+---
+kind: "Endpoints"
+apiVersion: "v1"
+metadata:
+  name: "external-mysql-3310"
+  namespace: mysql-router
+subsets:
+  - addresses:
+      - ip: "10.0.0.10"
+    ports:
+      - port: 3310
+        name: "mysql3310"
