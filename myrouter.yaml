@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-router
+  namespace: mysql-router
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: mysql-router
+  template:
+    metadata:
+      labels:
+        app: mysql-router
+        version: v1
+    spec:
+      containers:
+      - name: mysql-router
+        image: mysql/mysql-router
+        env:
+        - name: MYSQL_HOST
+          value: "10.0.0.10"
+        - name: MYSQL_PORT
+          value: "3310"
+        - name: MYSQL_USER
+          value: "gradmin"
+        - name: MYSQL_PASSWORD
+          value: "grpass"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6446
