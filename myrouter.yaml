@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-router
-  namespace: mysql-router
+  namespace: myic02
 spec:
   replicas: 1 
   selector:
@@ -19,13 +19,15 @@ spec:
         image: mysql/mysql-router
         env:
         - name: MYSQL_HOST
-          value: "10.0.0.10"
+          value: "mycluster"
         - name: MYSQL_PORT
-          value: "3310"
+          value: "3306"
         - name: MYSQL_USER
-          value: "gradmin"
+          value: "root"
         - name: MYSQL_PASSWORD
-          value: "grpass"
+          value: "sakila"
+        - name: MYSQL_ROUTER_BOOTSTRAP_EXTRA_OPTIONS
+          value: "--conf-set-option=routing:bootstrap_rw.max_connect_errors=500 --conf-set-option=routing:bootstrap_ro.max_connect_errors=500"
         imagePullPolicy: Always
         ports:
         - containerPort: 6446
